@@ -1,0 +1,77 @@
+import { useState } from "react";
+import { Button, TableModalField } from "../../..";
+import { randomKey } from "../../../lib/utils";
+import close from "../../../assets/close.svg";
+
+function _EditModal({
+	setIsModalOpen,
+	editTarget,
+	objects,
+	setObjects,
+	className,
+	modalBackground,
+	columnNames,
+	editMask,
+	saveButtonText,
+	closeSrc,
+}) {
+	const [object, setObject] = useState(objects[editTarget]);
+	function objectSetter(key, newValue) {
+		const model = object;
+		model[key] = newValue;
+		setObject(model);
+	}
+	return (
+		<div
+			className={`smart-table-edit-modal ${className}`}
+			style={{
+				position: "fixed",
+				display: "flex",
+				justifyContent: "center",
+				alignItems: "center",
+				background: modalBackground,
+				width: "100%",
+				height: "100%",
+				top: 0,
+				left: 0,
+				zIndex: 999,
+			}}
+		>
+			<div className="smart-table-edit-modal-header">
+				<Button
+					onClick={setIsModalOpen}
+					value={false}
+					innerText={<img src={closeSrc ? closeSrc : close} />}
+				/>
+			</div>
+			<div className="smart-table-edit-modal">
+				{Object.keys(object).map((key, index) => {
+					return (
+						<TableModalField
+							key={randomKey()}
+							param={columnNames[index]}
+							type={Array.isArray(editMask[key]) ? "array" : editMask[key]}
+							options={Array.isArray(editMask[key]) ? editMask[key] : null}
+							valueState={[
+								object[key],
+								(newValue) => objectSetter(key, newValue),
+							]}
+						/>
+					);
+				})}
+				<Button
+					onClick={() => {
+						setObjects((prev) => {
+							prev[editTarget] = object;
+							return prev;
+						});
+						setIsModalOpen(false);
+					}}
+					innerText={saveButtonText}
+				/>
+			</div>
+		</div>
+	);
+}
+
+export default _EditModal;
