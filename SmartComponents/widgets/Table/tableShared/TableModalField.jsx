@@ -42,6 +42,7 @@ function _TableModalField({ param, valueState, type, options }) {
 						setOption={state[1]}
 						initValue={state[0]}
 						sideEffect={valueState[1]}
+						selectorName={param}
 					/>
 				</div>
 			);

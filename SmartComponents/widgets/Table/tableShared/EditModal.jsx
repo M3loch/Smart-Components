@@ -11,7 +11,7 @@ function _EditModal({
 	className,
 	modalBackground,
 	columnNames,
-	editMask,
+	model,
 	saveButtonText,
 	closeSrc,
 }) {
@@ -50,8 +50,8 @@ function _EditModal({
 						<TableModalField
 							key={randomKey()}
 							param={columnNames[index]}
-							type={Array.isArray(editMask[key]) ? "array" : editMask[key]}
-							options={Array.isArray(editMask[key]) ? editMask[key] : null}
+							type={Array.isArray(model[key]) ? "array" : model[key]}
+							options={Array.isArray(model[key]) ? model[key] : null}
 							valueState={[
 								object[key],
 								(newValue) => objectSetter(key, newValue),

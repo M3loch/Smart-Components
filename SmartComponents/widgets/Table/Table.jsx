@@ -26,7 +26,7 @@ function _Table({
 	deleteSrc = null,
 	closeSrc = null,
 	deleteObject,
-	editMask = {},
+	model = {},
 	saveButtonText = "save",
 	addNewLineText = "add",
 }) {
@@ -47,7 +47,7 @@ function _Table({
 					className={editModalClassName}
 					modalBackground={modalBackground}
 					columnNames={columnNames}
-					editMask={editMask}
+					model={model}
 					saveButtonText={saveButtonText}
 					closeSrc={closeSrc}
 				/>
@@ -57,6 +57,10 @@ function _Table({
 					setIsCreateModalOpen={setIsCreateModalOpen}
 					modalBackground={modalBackground}
 					closeSrc={closeSrc}
+					model={model}
+					setObjects={setObjects}
+					saveButtonText={saveButtonText}
+					columnNames={columnNames}
 				/>
 			)}
 			<div className="smart-table" style={{ width: width, height: height }}>

@@ -84,7 +84,7 @@ function App() {
 				values={["name", "surname", "phone", "sex"]}
 				editable={true}
 				isDraggable={true}
-				editMask={{
+				model={{
 					name: "string",
 					surname: "string",
 					phone: "number",
