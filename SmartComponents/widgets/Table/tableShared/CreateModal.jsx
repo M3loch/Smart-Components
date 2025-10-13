@@ -13,6 +13,7 @@ function _CreateModal({
 	setObjects,
 	saveButtonText,
 }) {
+	const [stopper, setStopper] = useState(false);
 	const [newObject, setNewObject] = useState({});
 	function objectSetter(key, newValue) {
 		newObject[key] = newValue;
@@ -53,15 +54,19 @@ function _CreateModal({
 						/>
 					);
 				})}
+				<p style={stopper ? { color: "red" } : { color: "transparent" }}>
+					Не все поля заполненны
+				</p>
 				<Button
 					onClick={() => {
-						let stopper = false;
+						let temp = false;
 						Object.keys(model).map((key) => {
-							if (!newObject[key]) {
-								stopper = true;
+							if (!Boolean(newObject[key])) {
+								temp = true;
 							}
 						});
-						if (stopper) return;
+						setStopper(temp);
+						if (temp) return;
 						setObjects((prev) => {
 							prev.push(newObject);
 							return prev;

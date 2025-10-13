@@ -16,6 +16,7 @@ function _EditModal({
 	closeSrc,
 }) {
 	const [object, setObject] = useState(objects[editTarget]);
+	const [stopper, setStopper] = useState(false);
 	function objectSetter(key, newValue) {
 		const model = object;
 		model[key] = newValue;
@@ -59,8 +60,19 @@ function _EditModal({
 						/>
 					);
 				})}
+				<p style={stopper ? { color: "red" } : { color: "transparent" }}>
+					Не все поля заполненны
+				</p>
 				<Button
 					onClick={() => {
+						let temp = false;
+						Object.keys(model).map((key) => {
+							if (!Boolean(object[key])) {
+								temp = true;
+							}
+						});
+						setStopper(temp);
+						if (temp) return;
 						setObjects((prev) => {
 							prev[editTarget] = object;
 							return prev;
