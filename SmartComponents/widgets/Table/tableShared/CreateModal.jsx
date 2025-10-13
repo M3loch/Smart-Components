@@ -57,7 +57,6 @@ function _CreateModal({
 					onClick={() => {
 						let stopper = false;
 						Object.keys(model).map((key) => {
-							console.log(newObject[key]);
 							if (!newObject[key]) {
 								stopper = true;
 							}

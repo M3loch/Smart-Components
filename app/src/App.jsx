@@ -64,7 +64,6 @@ function App() {
 				objectState={objectState}
 				path={["l1_3", "l2_3", "l3_2"]}
 				label={"object toggler"}
-				// sideEffect={console.log(objectState[0])}
 			/>
 			{JSON.stringify(objectState[0])}
 			<Textarea

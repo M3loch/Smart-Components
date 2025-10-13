@@ -29,7 +29,6 @@ function _TableRow({
 	}
 
 	function handleDrop(index) {
-		console.log(index, dragIndex);
 		const newObjects = [...objects];
 		const draggedObject = newObjects[dragIndex];
 		newObjects.splice(dragIndex, 1);
