@@ -8,10 +8,11 @@ import {
 	Button,
 	CopyText,
 	Table,
+	Field,
 } from "../../SmartComponents";
 
 function App() {
-	const InputState = useState("");
+	const [inputValue, setInputValue] = useState("");
 	const [optionState, setOptionState] = useState("");
 	const listState = useState(["1", "2", "3"]);
 	const objectState = useState({
@@ -26,6 +27,8 @@ function App() {
 			},
 		},
 	});
+	const [fieldValue, setFieldValue] = useState("value");
+	const [textAreaValue, setTextAreaValue] = useState("");
 	const checked1 = useState(false);
 	const checked2 = useState(false);
 	const [value, setValue] = useState("");
@@ -51,7 +54,13 @@ function App() {
 				selectorName="option"
 				label={"select"}
 			/>
-			<Input state={InputState} label={"input"} type="number" max={10} />
+			<Input
+				value={inputValue}
+				setValue={setInputValue}
+				label={"input"}
+				type="number"
+				max={10}
+			/>
 			<CheckBox
 				checked={checked1}
 				listState={listState}
@@ -67,7 +76,8 @@ function App() {
 			/>
 			{JSON.stringify(objectState[0])}
 			<Textarea
-				state={useState("")}
+				value={textAreaValue}
+				setValue={setTextAreaValue}
 				placeholder={"text area"}
 				label={"textArea"}
 			/>
@@ -89,6 +99,11 @@ function App() {
 					phone: "number",
 					sex: ["м", "ж"],
 				}}
+			/>
+			<Field
+				value={fieldValue}
+				setValue={setFieldValue}
+				placeholder={"field placeholder"}
 			/>
 		</>
 	);

@@ -1,5 +1,6 @@
 function _Input({
-	state,
+	value,
+	setValue,
 	style = {},
 	type = "text",
 	min = null,
@@ -9,7 +10,6 @@ function _Input({
 	sideEffect,
 	label = null,
 }) {
-	const [value, setValue] = state;
 	if (type == "string") {
 		type = "text";
 	}

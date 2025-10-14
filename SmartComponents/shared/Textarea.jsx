@@ -3,13 +3,12 @@ import { useEffect, useRef } from "react";
 function _Textarea({
 	placeholder,
 	className,
-	state,
-	type = "text",
+	value,
+	setValue,
 	sideEffect = null,
 	max = null,
 	label = null,
 }) {
-	const [value, setValue] = state;
 	const textareaRef = useRef(null);
 
 	function changeEvent(event) {
@@ -32,7 +31,6 @@ function _Textarea({
 			<textarea
 				className={`smart-text-area ${className}`}
 				ref={textareaRef}
-				type={type}
 				placeholder={placeholder}
 				value={value}
 				onChange={changeEvent}

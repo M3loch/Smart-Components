@@ -13,6 +13,7 @@ import _TableControls from "./widgets/Table/tableShared/TableControls.jsx";
 import _EditModal from "./widgets/Table/tableShared/EditModal.jsx";
 import _TableModalField from "./widgets/Table/tableShared/TableModalField.jsx";
 import _CreateModal from "./widgets/Table/tableShared/CreateModal.jsx";
+import _Field from "./widgets/Field/Field.jsx";
 
 export const Button = _Button;
 export const CheckBox = _CheckBox;
@@ -30,3 +31,4 @@ export const TableControls = _TableControls;
 export const EditModal = _EditModal;
 export const TableModalField = _TableModalField;
 export const CreateModal = _CreateModal;
+export const Field = _Field;

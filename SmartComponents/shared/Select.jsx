@@ -17,7 +17,7 @@ function _Select({
 	}
 	return (
 		<div className="smart-select-container">
-			{label && <div className="smart-selec-label">{label}</div>}
+			{label && <div className="smart-select-label">{label}</div>}
 
 			<select
 				className={className}
