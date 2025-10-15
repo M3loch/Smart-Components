@@ -6,13 +6,12 @@ function _CheckBox({
 	objectState = null,
 	path = null,
 	checked,
+	setChecked,
 	className = "",
 	sideEffect,
 }) {
-	const [checkedState, setChecked] = checked;
-
 	function toggleChecked() {
-		if (typeof checkedState != "boolean") {
+		if (typeof checked != "boolean") {
 			return;
 		}
 		setChecked((prev) => !prev);
@@ -67,8 +66,8 @@ function _CheckBox({
 			<input
 				className={className}
 				type="checkbox"
-				checked={checkedState}
-				value={checkedState}
+				checked={checked}
+				value={checked}
 				onChange={changeEvent}
 			/>
 		</div>

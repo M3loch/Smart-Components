@@ -1,0 +1,36 @@
+.smart-table {
+	color: black;
+}
+
+.smart-table-header-collapsed {
+	background: var(--table-header);
+	border-radius: 20px;
+	font-weight: 600;
+}
+
+.smart-table-header-opend {
+	background: var(--table-header);
+	border-radius: 20px 20px 0 0;
+	font-weight: 600;
+}
+
+.smart-table-label {
+	background: var(--table-label);
+	height: 50px;
+}
+
+.smart-table-row {
+	background: var(--table-bg);
+}
+
+.smart-table-row-counter,
+.smart-table-controls {
+	background: var(--table-label);
+}
+
+.smart-table-new-button {
+	height: 30px;
+}
+.smart-table-create-button-container {
+	background: var(--table-label);
+}

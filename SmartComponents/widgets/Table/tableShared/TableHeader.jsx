@@ -9,9 +9,16 @@ function _TableHeader({ tableName, isCollapsable, collapsed, setCollapsed }) {
 		padding: "0 20px",
 	};
 	return (
-		<div className="smart-table-header" style={_styles}>
+		<div
+			className={
+				!collapsed ? "smart-table-header-opend" : "smart-table-header-collapsed"
+			}
+			style={_styles}
+		>
 			<p className="smart-table-name">{tableName}</p>
-			{isCollapsable && <CheckBox checked={[!collapsed, setCollapsed]} />}
+			{isCollapsable && (
+				<CheckBox checked={!collapsed} setChecked={setCollapsed} />
+			)}
 		</div>
 	);
 }

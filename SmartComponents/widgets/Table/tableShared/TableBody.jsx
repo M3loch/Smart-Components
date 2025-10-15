@@ -25,7 +25,7 @@ function _TableBody({
 	setIsCreateModalOpen,
 }) {
 	return (
-		<div className="smart-table-blody">
+		<div className="smart-table-body">
 			<TableLabel
 				columnNames={columnNames}
 				firstColumnClassName={firstColumnClassName}
@@ -56,12 +56,18 @@ function _TableBody({
 				/>
 			))}
 			{editable && (
-				<Button
-					innerText={addNewLineText}
-					style={{ width: "100%" }}
-					onClick={setIsCreateModalOpen}
-					value={true}
-				/>
+				<div
+					className="smart-table-create-button-container"
+					style={{ padding: "5px" }}
+				>
+					<Button
+						innerText={addNewLineText}
+						style={{ width: "100%" }}
+						onClick={setIsCreateModalOpen}
+						value={true}
+						className="smart-table-new-button"
+					/>
+				</div>
 			)}
 		</div>
 	);

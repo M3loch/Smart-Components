@@ -2,16 +2,17 @@ import { randomKey } from "../../../lib/utils";
 
 function _TableLabel({
 	columnNames = [],
-	firstColumnClassName,
-	labelClassName,
-	columnClassName,
-	controlColumnClassName,
+	firstColumnClassName = "",
+	labelClassName = "",
+	columnClassName = "",
+	controlColumnClassName = "",
 	editable,
 }) {
 	const _styles = {
 		display: "flex",
 		flexDirection: "row",
 		justifyContent: "space-evenly",
+		alignItems: "center",
 	};
 
 	const _maxWidth = (1 / (columnNames.length + 2)) * 100;
@@ -25,6 +26,7 @@ function _TableLabel({
 					textWrap: "wrap",
 					flex: 1,
 					maxWidth: `${_maxWidth}%`,
+					width: `100%`,
 				}}
 			/>
 			{columnNames.map((column) => {
@@ -48,11 +50,7 @@ function _TableLabel({
 				<div
 					className={`smart-table-controls-column ${controlColumnClassName}`}
 					style={{
-						textAlign: "center",
-						wordBreak: "break-all",
-						textWrap: "wrap",
-						flex: 1,
-						maxWidth: `${_maxWidth}%`,
+						minWidth: `${_maxWidth}%`,
 					}}
 				/>
 			)}

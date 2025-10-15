@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Input, Select, Textarea } from "../..";
+import "../../styles/field.css";
 
 function _Field({
 	value,
@@ -9,8 +10,11 @@ function _Field({
 	type = "string",
 	options = [],
 	saveText = "Save",
+	editable = "true",
+	width = "auto",
 }) {
 	const [editMode, setEditMode] = useState(false);
+	const [emptyField, setEmptyField] = useState(false);
 	const [_value, _setValue] = useState(value);
 
 	let _input;
@@ -22,6 +26,8 @@ function _Field({
 					value={_value}
 					setValue={_setValue}
 					placeholder={placeholder}
+					className={"smart-field-input"}
+					style={emptyField ? { border: "solid red 1px" } : null}
 					type={type}
 				/>
 			);
@@ -50,25 +56,37 @@ function _Field({
 			break;
 	}
 	return (
-		<div className={`smart-field ${className}`}>
+		<div className={`smart-field ${className}`} style={{ width: width }}>
 			{editMode ? (
 				<div>
 					{_input}
 					<Button
+						className="smart-field-button"
 						innerText={saveText}
 						onClick={() => {
-							setEditMode(false);
-							setValue(_value);
-							console.log("sad");
+							if (_value) {
+								setEditMode(false);
+								setEmptyField(false);
+								setValue(_value);
+							} else {
+								setEmptyField(true);
+							}
 						}}
 					/>
 				</div>
 			) : (
-				<div onClick={() => setEditMode(true)}>
-					<p>{value}</p>
-					<p style={{ opacity: 0.5 }}>{placeholder}</p>
+				<div
+					className="smart-field-value-container"
+					onClick={() => {
+						editable && setEditMode(true);
+					}}
+				>
+					<p className="smart-field-value">{value}</p>
 				</div>
 			)}
+			<p className="smart-field-placeholder" style={{ opacity: 0.5 }}>
+				{placeholder}
+			</p>
 		</div>
 	);
 }

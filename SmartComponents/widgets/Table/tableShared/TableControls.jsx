@@ -4,7 +4,7 @@ import _delete from "../../../assets/delete.svg";
 
 function _TableControls({
 	_maxWidth,
-	className,
+	className = "",
 	editSrc,
 	deleteSrc,
 	index,
@@ -18,14 +18,12 @@ function _TableControls({
 			style={{
 				display: "flex",
 				flexDirection: "row",
-				justifyContent: "space-between",
+				justifyContent: "space-evenly",
 				alignItems: "center",
-				textAlign: "center",
-				wordBreak: "break-all",
 				textWrap: "wrap",
 				flex: 1,
 				boxSizing: "content-box",
-				maxWidth: `${_maxWidth}%`,
+				maxWidth: `calc(${_maxWidth}%)`,
 			}}
 		>
 			<Button
@@ -40,6 +38,7 @@ function _TableControls({
 					setEditTarget(index);
 					setIsEditModalOpen(true);
 				}}
+				style={{ padding: "10px" }}
 			/>
 			<Button
 				innerText={
@@ -52,6 +51,7 @@ function _TableControls({
 				onClick={() =>
 					setObjects((prev) => prev.filter((object) => object !== prev[index]))
 				}
+				style={{ padding: "10px" }}
 			/>
 		</div>
 	);

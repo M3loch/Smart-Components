@@ -57,8 +57,9 @@ function _TableRow({
 		>
 			<TableValue
 				value={index + 1}
-				className={rowClassName}
+				className={rowClassName + " smart-table-row-counter"}
 				_maxWidth={_maxWidth}
+				_width={`${_maxWidth}%`}
 			/>
 			{values.map((value) => (
 				<TableValue

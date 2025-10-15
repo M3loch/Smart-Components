@@ -1,6 +1,8 @@
 import { useState } from "react";
 import _TableHeader from "./tableShared/TableHeader";
-import { Button, CreateModal, EditModal, TableBody } from "../..";
+import { CreateModal, EditModal, TableBody, TableHeader } from "../..";
+
+import "../../styles/table.css";
 
 function _Table({
 	tableName,
@@ -64,7 +66,7 @@ function _Table({
 				/>
 			)}
 			<div className="smart-table" style={{ width: width, height: height }}>
-				<_TableHeader
+				<TableHeader
 					tableName={tableName}
 					isCollapsable={isCollapsable}
 					collapsed={_isCollapsed}

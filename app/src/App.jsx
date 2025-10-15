@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./App.css";
 import {
 	Select,
 	CheckBox,
@@ -9,6 +8,7 @@ import {
 	CopyText,
 	Table,
 	Field,
+	List,
 } from "../../SmartComponents";
 
 function App() {
@@ -62,14 +62,16 @@ function App() {
 				max={10}
 			/>
 			<CheckBox
-				checked={checked1}
+				setChecked={checked1[1]}
+				checked={checked1[0]}
 				listState={listState}
 				target={"2"}
 				label={"list toggler"}
 			/>
 			{JSON.stringify(listState[0])}
 			<CheckBox
-				checked={checked2}
+				checked={checked2[0]}
+				setChecked={checked2[1]}
 				objectState={objectState}
 				path={["l1_3", "l2_3", "l3_2"]}
 				label={"object toggler"}
@@ -99,11 +101,22 @@ function App() {
 					phone: "number",
 					sex: ["м", "ж"],
 				}}
+				width="700px"
 			/>
 			<Field
 				value={fieldValue}
 				setValue={setFieldValue}
 				placeholder={"field placeholder"}
+				editable={true}
+				width="200px"
+			/>
+
+			<List
+				list={listState[0]}
+				setList={listState[1]}
+				isCollapsable={true}
+				listName={"list"}
+				width="200px"
 			/>
 		</>
 	);

@@ -12,7 +12,7 @@ function _Button({
 
 	return (
 		<div className="smart-button-container">
-			{label && <div className="smart-button-label">{_label}</div>}
+			{label && <div className="smart-button-label">{label}</div>}
 			<button
 				style={style}
 				className={`smart-button ${className}`}
