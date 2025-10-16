@@ -5,7 +5,6 @@ import "../../styles/field.css";
 function _Field({
 	value,
 	setValue,
-	className,
 	placeholder,
 	type = "string",
 	options = [],
