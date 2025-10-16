@@ -5,7 +5,6 @@ function _Select({
 	options = [],
 	setOption,
 	byIndex = false,
-	className,
 	sideEffect = null,
 	initValue = null,
 }) {
@@ -20,7 +19,6 @@ function _Select({
 			{label && <div className="smart-select-label">{label}</div>}
 
 			<select
-				className={className}
 				style={style}
 				onChange={selectHandler}
 				defaultValue={initValue ? initValue : selectorName}

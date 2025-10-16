@@ -2,7 +2,7 @@ import { Button } from "../../..";
 import _delete from "../../../assets/delete.svg";
 import _edit from "../../../assets/edit.svg";
 
-function _ListControls({ setList, target, setEditListModal }) {
+function _ListControls({ setList, target, setEditListModal, setEditTarget }) {
 	const _style = {
 		display: "flex",
 		flexDirection: "row",
@@ -20,8 +20,10 @@ function _ListControls({ setList, target, setEditListModal }) {
 			<Button innerText={<img src={_delete} onClick={removeFromList} />} />
 			<Button
 				innerText={<img src={_edit} />}
-				onClick={setEditListModal}
-				value={true}
+				onClick={() => {
+					setEditListModal(true);
+					setEditTarget(target);
+				}}
 			/>
 		</div>
 	);

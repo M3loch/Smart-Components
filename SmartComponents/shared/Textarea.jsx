@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 
 function _Textarea({
 	placeholder,
-	className,
 	value,
 	setValue,
 	sideEffect = null,
@@ -29,7 +28,7 @@ function _Textarea({
 		<div className="smart-textarea-container">
 			{label && <div className="smart-textarea-label">{label}</div>}
 			<textarea
-				className={`smart-text-area ${className}`}
+				className={"smart-text-area"}
 				ref={textareaRef}
 				placeholder={placeholder}
 				value={value}

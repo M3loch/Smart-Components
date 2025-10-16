@@ -6,7 +6,6 @@ import { randomKey } from "../../../lib/utils";
 function _CreateModal({
 	setIsCreateModalOpen,
 	modalBackground,
-	className = "",
 	closeSrc,
 	columnNames,
 	model,
@@ -21,7 +20,7 @@ function _CreateModal({
 	}
 	return (
 		<div
-			className={`smart-table-edit-modal ${className}`}
+			className={"smart-table-edit-modal"}
 			style={{
 				position: "fixed",
 				display: "flex",

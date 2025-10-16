@@ -1,12 +1,14 @@
+import { useState } from "react";
 import { Button, Input, ListModalField } from "../../..";
 import close from "../../../assets/close.svg";
 
 function _CreateElementModal({
 	type,
 	setList,
-	setCreateModal,
+	setCreateElementModal,
 	modalBackground,
 }) {
+	const [newValue, setNewValue] = useState("");
 	return (
 		<div
 			className={`smart-list-create-modal`}
@@ -25,14 +27,24 @@ function _CreateElementModal({
 		>
 			<div className="smart-list-create-modal-header">
 				<Button
-					onClick={setCreateModal}
+					onClick={setCreateElementModal}
 					value={false}
 					innerText={<img src={close} />}
 				/>
 			</div>
 			<div className="smart-list-create-modal-body">
-				<ListModalField type={type} />
+				<ListModalField type={type} valueState={[newValue, setNewValue]} />
 			</div>
+			<Button
+				innerText={"save"}
+				onClick={() => {
+					setList((prev) => {
+						prev.push(newValue);
+						return prev;
+					});
+					setCreateElementModal(false);
+				}}
+			/>
 		</div>
 	);
 }

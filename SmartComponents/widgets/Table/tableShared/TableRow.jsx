@@ -5,12 +5,7 @@ function _TableRow({
 	index,
 	object = {},
 	values = [],
-	rowClassName,
-	valueClassName,
-	controlClassName,
 	editable,
-	editSrc,
-	deleteSrc,
 	isDraggable,
 	setObjects,
 	objects,
@@ -45,7 +40,7 @@ function _TableRow({
 	const _maxWidth = (1 / (values.length + 2)) * 100;
 	return isDraggable ? (
 		<div
-			className={`smart-table-row ${rowClassName}`}
+			className={"smart-table-row"}
 			style={(() => {
 				_styles.cursor = "move";
 				return _styles;
@@ -57,7 +52,7 @@ function _TableRow({
 		>
 			<TableValue
 				value={index + 1}
-				className={rowClassName + " smart-table-row-counter"}
+				className={"smart-table-row-counter"}
 				_maxWidth={_maxWidth}
 				_width={`${_maxWidth}%`}
 			/>
@@ -65,17 +60,12 @@ function _TableRow({
 				<TableValue
 					key={randomKey()}
 					value={object[value]}
-					className={valueClassName}
 					_maxWidth={_maxWidth}
 				/>
 			))}
 			{editable && (
 				<TableControls
-					className={controlClassName}
 					_maxWidth={_maxWidth}
-					editSrc={editSrc}
-					deleteSrc={deleteSrc}
-					deleteObject={deleteObject}
 					index={index}
 					setObjects={setObjects}
 					setIsEditModalOpen={setIsEditModalOpen}
@@ -84,23 +74,17 @@ function _TableRow({
 			)}
 		</div>
 	) : (
-		<div className={`smart-table-row ${rowClassName}`} style={_styles}>
-			<TableValue
-				value={index}
-				className={rowClassName}
-				_maxWidth={_maxWidth}
-			/>
+		<div className={"smart-table-row"} style={_styles}>
+			<TableValue value={index} _maxWidth={_maxWidth} />
 			{values.map((value) => (
 				<TableValue
 					key={randomKey()}
 					value={object[value]}
-					className={valueClassName}
 					_maxWidth={_maxWidth}
 				/>
 			))}
 			{editable && (
 				<TableControls
-					className={controlClassName}
 					_maxWidth={_maxWidth}
 					index={index}
 					editSrc={editSrc}

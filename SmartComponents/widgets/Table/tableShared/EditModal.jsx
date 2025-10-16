@@ -8,7 +8,6 @@ function _EditModal({
 	editTarget,
 	objects,
 	setObjects,
-	className,
 	modalBackground,
 	columnNames,
 	model,
@@ -24,7 +23,7 @@ function _EditModal({
 	}
 	return (
 		<div
-			className={`smart-table-edit-modal ${className}`}
+			className={"smart-table-edit-modal"}
 			style={{
 				position: "fixed",
 				display: "flex",

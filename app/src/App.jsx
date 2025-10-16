@@ -14,7 +14,7 @@ import {
 function App() {
 	const [inputValue, setInputValue] = useState("");
 	const [optionState, setOptionState] = useState("");
-	const listState = useState(["1", "2", "3"]);
+	const [list, setList] = useState(["1", "2", "3"]);
 	const objectState = useState({
 		l1_1: 11,
 		l1_2: 12,
@@ -62,17 +62,15 @@ function App() {
 				max={10}
 			/>
 			<CheckBox
-				setChecked={checked1[1]}
-				checked={checked1[0]}
-				listState={listState}
+				list={list}
+				setList={setList}
 				target={"2"}
 				label={"list toggler"}
 			/>
-			{JSON.stringify(listState[0])}
+			{list.toString()}
 			<CheckBox
-				checked={checked2[0]}
-				setChecked={checked2[1]}
-				objectState={objectState}
+				object={objectState[0]}
+				setObject={objectState[1]}
 				path={["l1_3", "l2_3", "l3_2"]}
 				label={"object toggler"}
 			/>
@@ -86,7 +84,7 @@ function App() {
 			{value}
 			<Button innerText={"Button"} value={"value setted"} onClick={setValue} />
 			<CopyText value={"text to copy"} />
-			<Table
+			{/* <Table
 				tableName={"table"}
 				isCollapsable={true}
 				columnNames={["имя", "фамилия", "номер", "пол"]}
@@ -102,7 +100,7 @@ function App() {
 					sex: ["м", "ж"],
 				}}
 				width="700px"
-			/>
+			/> */}
 			<Field
 				value={fieldValue}
 				setValue={setFieldValue}
@@ -111,13 +109,13 @@ function App() {
 				width="200px"
 			/>
 
-			<List
+			{/* <List
 				list={listState[0]}
 				setList={listState[1]}
 				isCollapsable={true}
 				listName={"list"}
 				width="200px"
-			/>
+			/> */}
 		</>
 	);
 }

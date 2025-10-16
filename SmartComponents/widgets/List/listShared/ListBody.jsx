@@ -1,7 +1,14 @@
 import { Button, ListControls } from "../../..";
 import { randomKey } from "../../../lib/utils";
 
-function _ListBody({ list, setList, setEditListModal, setNewElementModal }) {
+function _ListBody({
+	list,
+	setList,
+	setEditListModal,
+	setNewElementModal,
+	editable,
+	setEditTarget,
+}) {
 	const _bodyStyle = {
 		display: "flex",
 		flexDirection: "column",
@@ -24,21 +31,26 @@ function _ListBody({ list, setList, setEditListModal, setNewElementModal }) {
 					style={_elemStyle}
 				>
 					{elem}
-					<ListControls
-						target={elem}
-						setList={setList}
-						setEditListModal={setEditListModal}
-					/>
+					{editable && (
+						<ListControls
+							target={elem}
+							setList={setList}
+							setEditListModal={setEditListModal}
+							setEditTarget={setEditTarget}
+						/>
+					)}
 				</div>
 			))}
-			<div className="create-new-element" style={{ width: "100%" }}>
-				<Button
-					innerText={"add"}
-					onClick={setNewElementModal}
-					value={true}
-					style={{ width: "100%" }}
-				/>
-			</div>
+			{editable && (
+				<div className="create-new-element" style={{ width: "100%" }}>
+					<Button
+						innerText={"add"}
+						onClick={setNewElementModal}
+						value={true}
+						style={{ width: "100%" }}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }

@@ -1,20 +1,24 @@
 import { Button } from "../../..";
 import _edit from "../../../assets/edit.svg";
 import _delete from "../../../assets/delete.svg";
+import config from "../../../config";
 
 function _TableControls({
 	_maxWidth,
-	className = "",
-	editSrc,
-	deleteSrc,
 	index,
 	setObjects,
 	setIsEditModalOpen,
 	setEditTarget,
 }) {
+	const deleteSrc = (() => {
+		config.deleteButtonText || config.deleteButtonImg;
+	})();
+	const editSrc = (() => {
+		config.editButtonText || config.editButtonImg;
+	})();
 	return (
 		<div
-			className={`smart-table-controls ${className}`}
+			className={"smart-table-controls"}
 			style={{
 				display: "flex",
 				flexDirection: "row",

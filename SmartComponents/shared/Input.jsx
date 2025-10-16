@@ -6,7 +6,6 @@ function _Input({
 	min = null,
 	max = null,
 	placeholder,
-	className,
 	sideEffect,
 	label = null,
 }) {
@@ -61,7 +60,6 @@ function _Input({
 
 			<input
 				placeholder={placeholder}
-				className={className}
 				style={style}
 				value={value}
 				onChange={onChange}

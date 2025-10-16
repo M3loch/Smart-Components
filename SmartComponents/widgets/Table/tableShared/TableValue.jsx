@@ -1,7 +1,7 @@
-function _TableValue({ value, className, _maxWidth }) {
+function _TableValue({ value, _maxWidth }) {
 	return (
 		<div
-			className={`smart-table-value ${className}`}
+			className={`smart-table-value`}
 			style={{
 				textAlign: "center",
 				wordBreak: "break-all",

@@ -1,36 +1,25 @@
 import { useState } from "react";
 import _TableHeader from "./tableShared/TableHeader";
 import { CreateModal, EditModal, TableBody, TableHeader } from "../..";
+import config from "../../config";
 
 import "../../styles/table.css";
-
 function _Table({
 	tableName,
-	isCollapsable = false,
-	isCollapsed = false,
 	columnNames = [],
-	firstColumnClassName = "",
-	labelClassName = "",
-	columnClassName = "",
-	rowClassName = "",
-	valueClassName = "",
-	controlsClassName = "",
-	editModalClassName = "",
-	modalBackground = "#00000060",
 	objects = [],
 	setObjects,
-	isDraggable = false,
 	values = [],
+	model = {},
+	isCollapsable = false,
+	isCollapsed = false,
+	isDraggable = false,
+	editable = false,
 	width = "auto",
 	height = "auto",
-	editable = false,
-	editSrc = null,
-	deleteSrc = null,
-	closeSrc = null,
-	deleteObject,
-	model = {},
 	saveButtonText = "save",
-	addNewLineText = "add",
+	createButtonText = config.createButtonText,
+	modalBackground = config.modalBackground,
 }) {
 	const [_isCollapsed, _setIsCollapsed] = useState(isCollapsed);
 	const [dragIndex, setDragIndex] = useState(null);
@@ -46,19 +35,16 @@ function _Table({
 					editTarget={editTarget}
 					objects={objects}
 					setObjects={setObjects}
-					className={editModalClassName}
 					modalBackground={modalBackground}
 					columnNames={columnNames}
 					model={model}
 					saveButtonText={saveButtonText}
-					closeSrc={closeSrc}
 				/>
 			)}
 			{isCreateModalOpen && (
 				<CreateModal
 					setIsCreateModalOpen={setIsCreateModalOpen}
 					modalBackground={modalBackground}
-					closeSrc={closeSrc}
 					model={model}
 					setObjects={setObjects}
 					saveButtonText={saveButtonText}
@@ -76,24 +62,14 @@ function _Table({
 					<TableBody
 						editable={editable}
 						columnNames={columnNames}
-						firstColumnClassName={firstColumnClassName}
-						labelClassName={labelClassName}
-						columnClassName={columnClassName}
-						rowClassName={rowClassName}
-						valueClassName={valueClassName}
 						objects={objects}
 						isDraggable={isDraggable}
 						values={values}
 						setObjects={setObjects}
-						controlsClassName={controlsClassName}
-						editSrc={editSrc}
-						deleteSrc={deleteSrc}
 						setDragIndex={setDragIndex}
 						dragIndex={dragIndex}
-						deleteObject={deleteObject}
 						setIsEditModalOpen={setIsEditModalOpen}
 						setEditTarget={setEditTarget}
-						addNewLineText={addNewLineText}
 						setIsCreateModalOpen={setIsCreateModalOpen}
 					/>
 				)}

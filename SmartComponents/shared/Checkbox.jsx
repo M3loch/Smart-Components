@@ -1,50 +1,61 @@
+import { useState } from "react";
+
 function _CheckBox({
-	label,
-	options = [true, false],
-	listState = null,
+	label = null,
+	list = null,
+	setList = null,
 	target = null,
-	objectState = null,
+	object = null,
+	setObject = null,
 	path = null,
-	checked,
-	setChecked,
-	className = "",
+	value = null,
+	setValue = null,
+	options = [true, false],
 	sideEffect,
 }) {
-	function toggleChecked() {
-		if (typeof checked != "boolean") {
-			return;
-		}
-		setChecked((prev) => !prev);
-		sideEffect && sideEffect();
+	let mode;
+	let initialValue;
+
+	if (list != null && target != null) {
+		mode = "list";
+		initialValue = list.includes(target);
+	} else if (object != null && path != null) {
+		mode = "obj";
+		const currentValue = path.reduce((acc, key) => acc?.[key], object);
+		initialValue = currentValue == options[0];
+	} else if (value != null) {
+		mode = "val";
+		initialValue = value == options[0];
+	} else {
+		throw console.error("something went wrong: can't set mode");
 	}
 
-	function changeEvent() {
-		if (
-			listState == null &&
-			objectState == null &&
-			target == null &&
-			path == null
-		) {
-			// if 'options' prop - default, than value will be changing between true or false, else it will be changing between two passed params in 'options' array
-			toggleChecked();
-		}
-		if (listState != null && target != null) {
-			// if listState is passed and target value is passed checkbox can toggle wether has 'list' 'targer' or hasn't
-			const [list, setList] = listState;
-			if (list.includes(target)) {
-				setList((prev) => {
-					return prev.filter((elem) => {
-						return elem != target;
-					});
+	const [current, setCurrent] = useState(initialValue);
+
+	function onChange() {
+		if (mode == "val") {
+			let temp;
+			current ? (temp = options[1]) : (temp = options[0]);
+			setValue(temp);
+			setCurrent((prev) => !prev);
+			sideEffect(temp);
+		} else if (mode == "list") {
+			let temp = list;
+			console.log(current);
+			if (current) {
+				temp = temp.filter((elem) => {
+					return elem != target;
 				});
-			} else {
-				list.push(target);
-				setList(list);
+				setList(temp);
+			} else if (!current) {
+				temp = [...temp, target];
+				setList(temp);
 			}
-			toggleChecked();
-		}
-		if (objectState != null && path != null) {
-			// if objectState and path to target value is passed checkbox can toggle object's target value between 'options'
+			setCurrent((prev) => !prev);
+
+			sideEffect && sideEffect(temp);
+		} else if (mode == "obj") {
+			let temp;
 			function updateNestedValue(obj, path, newValue) {
 				if (path.length === 0) return newValue;
 				const [key, ...rest] = path;
@@ -53,22 +64,23 @@ function _CheckBox({
 					[key]: updateNestedValue(obj[key], rest, newValue),
 				};
 			}
-			const [object, setObject] = objectState;
-			const currentValue = path.reduce((acc, key) => acc?.[key], object);
-			const newValue = currentValue === options[0] ? options[1] : options[0];
-			setObject(updateNestedValue(object, path, newValue));
-			toggleChecked();
+			const newValue = current ? options[1] : options[0];
+			temp = updateNestedValue(object, path, newValue);
+			setObject(temp);
+			setCurrent((prev) => !prev);
+			sideEffect && sideEffect(temp);
 		}
 	}
+
 	return (
-		<div className={`smart-checkbox-container smart-container`}>
-			{label && <div className="smart-checkbox-label">{label}</div>}
+		<div className={`sc-checkbox-container`}>
+			{label && <div className="sc-checkbox-label">{label}</div>}
 			<input
-				className={className}
 				type="checkbox"
-				checked={checked}
-				value={checked}
-				onChange={changeEvent}
+				className="cs-checkbox"
+				checked={current}
+				value={current}
+				onChange={onChange}
 			/>
 		</div>
 	);
