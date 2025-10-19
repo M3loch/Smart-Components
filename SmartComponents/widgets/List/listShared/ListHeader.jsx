@@ -1,19 +1,32 @@
 import { CheckBox } from "../../..";
+import config from "../../../config";
 
 function _ListHeader({ listName, isCollapsable, collapsed, setCollapsed }) {
-	const _style = {
+	const _styles = {
 		display: "flex",
 		flexDirection: "row",
-		alignItems: "center",
 		justifyContent: "space-between",
-		padding: "0px 10px",
+		alignItems: "center",
+		padding: "0 20px",
 	};
-
 	return (
-		<div className="list-header" style={_style}>
-			<p>{listName}</p>
+		<div
+			className={"sc-list-header"}
+			style={
+				collapsed
+					? { ...config.listHeaderCollapsed, ..._styles }
+					: { ...config.listHeaderOpened, ..._styles }
+			}
+		>
+			<p className="sc-list-name" style={config.listName}>
+				{listName}
+			</p>
 			{isCollapsable && (
-				<CheckBox setChecked={setCollapsed} checked={!collapsed} />
+				<CheckBox
+					value={collapsed}
+					setValue={setCollapsed}
+					options={[false, true]}
+				/>
 			)}
 		</div>
 	);

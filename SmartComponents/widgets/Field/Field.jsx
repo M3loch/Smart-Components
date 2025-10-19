@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { Button, Input, Select, Textarea } from "../..";
-import "../../styles/field.css";
+import config from "../../config";
 
 function _Field({
 	value,
 	setValue,
-	placeholder,
+	label,
 	type = "string",
 	options = [],
-	saveText = "Save",
 	editable = "true",
 	width = "auto",
 }) {
@@ -24,9 +23,9 @@ function _Field({
 				<Input
 					value={_value}
 					setValue={_setValue}
-					placeholder={placeholder}
+					placeholder={label}
 					className={"smart-field-input"}
-					style={emptyField ? { border: "solid red 1px" } : null}
+					style={emptyField ? config.fieldInputIncorrect : config.fieldInput}
 					type={type}
 				/>
 			);
@@ -36,7 +35,8 @@ function _Field({
 				<Input
 					value={_value}
 					setValue={_setValue}
-					placeholder={placeholder}
+					placeholder={label}
+					style={emptyField ? config.fieldInputIncorrect : config.fieldInput}
 					type={type}
 				/>
 			);
@@ -48,20 +48,26 @@ function _Field({
 					options={options}
 					initValue={_value}
 					setOption={_setValue}
-					selectorName={placeholder}
+					selectorName={label}
 				/>
 			);
 		default:
 			break;
 	}
 	return (
-		<div className={`smart-field ${className}`} style={{ width: width }}>
+		<div className={"smart-field"} style={{ ...config.field, width: width }}>
 			{editMode ? (
-				<div>
+				<div style={config.fieldInputContainer}>
 					{_input}
 					<Button
 						className="smart-field-button"
-						innerText={saveText}
+						innerText={
+							config.saveButtonImg ? (
+								<img src={config.saveButtonImg} />
+							) : (
+								config.saveButtonText
+							)
+						}
 						onClick={() => {
 							if (_value) {
 								setEditMode(false);
@@ -71,6 +77,7 @@ function _Field({
 								setEmptyField(true);
 							}
 						}}
+						style={config.fieldSaveBottom}
 					/>
 				</div>
 			) : (
@@ -79,12 +86,18 @@ function _Field({
 					onClick={() => {
 						editable && setEditMode(true);
 					}}
+					style={{ ...config.fieldValueContainer }}
 				>
-					<p className="smart-field-value">{value}</p>
+					<p className="smart-field-value" style={{ ...config.fieldValue }}>
+						{value}
+					</p>
 				</div>
 			)}
-			<p className="smart-field-placeholder" style={{ opacity: 0.5 }}>
-				{placeholder}
+			<p
+				className="smart-field-label"
+				style={{ ...config.fieldLabel, opacity: 0.5 }}
+			>
+				{label}
 			</p>
 		</div>
 	);

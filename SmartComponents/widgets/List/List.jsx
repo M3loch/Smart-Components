@@ -2,6 +2,7 @@ import { CreateElementModal, EditElementModal, ListHeader } from "../..";
 import { ListBody } from "../..";
 
 import { useState } from "react";
+import config from "../../config";
 
 function _List({
 	list,
@@ -19,7 +20,7 @@ function _List({
 	const [editTarget, setEditTarget] = useState(false);
 
 	return (
-		<div className="smart-list" style={{ width: width }}>
+		<div className="smart-list" style={{ width: width, ...config.list }}>
 			<div className="modals">
 				{editListModal && (
 					<EditElementModal
@@ -27,13 +28,15 @@ function _List({
 						target={editTarget}
 						type={"string"}
 						setList={setList}
+						list={list}
 					/>
 				)}
 				{createElementModal && (
 					<CreateElementModal
 						modalBackground={modalBackground}
-						setCreateMosetCreateElementModaldal={setCreateElementModal}
+						setCreateElementModal={setCreateElementModal}
 						type={type}
+						list={list}
 						setList={setList}
 					/>
 				)}

@@ -1,4 +1,5 @@
 import { Button, ListControls } from "../../..";
+import config from "../../../config";
 import { randomKey } from "../../../lib/utils";
 
 function _ListBody({
@@ -24,16 +25,19 @@ function _ListBody({
 	};
 	return (
 		<div className="list-body" style={_bodyStyle}>
-			{list.map((elem) => (
+			{list.map((elem, index) => (
 				<div
 					className="smart-list-element"
 					key={randomKey()}
 					style={_elemStyle}
 				>
-					{elem}
+					<p className="list-value" style={config.listValue}>
+						{elem}
+					</p>
 					{editable && (
 						<ListControls
 							target={elem}
+							list={list}
 							setList={setList}
 							setEditListModal={setEditListModal}
 							setEditTarget={setEditTarget}
@@ -42,12 +46,19 @@ function _ListBody({
 				</div>
 			))}
 			{editable && (
-				<div className="create-new-element" style={{ width: "100%" }}>
+				<div
+					className="create-new-element"
+					style={{
+						width: "100%",
+						boxSizing: "border-box",
+						...config.createListElement,
+					}}
+				>
 					<Button
 						innerText={"add"}
 						onClick={setNewElementModal}
 						value={true}
-						style={{ width: "100%" }}
+						style={{ padding: "5px", margin: " 5px 0" }}
 					/>
 				</div>
 			)}

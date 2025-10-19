@@ -1,4 +1,5 @@
 import { useState } from "react";
+import config from "../config";
 
 function _CheckBox({
 	label = null,
@@ -38,7 +39,7 @@ function _CheckBox({
 			current ? (temp = options[1]) : (temp = options[0]);
 			setValue(temp);
 			setCurrent((prev) => !prev);
-			sideEffect(temp);
+			sideEffect && sideEffect(temp);
 		} else if (mode == "list") {
 			let temp = list;
 			console.log(current);
@@ -73,14 +74,19 @@ function _CheckBox({
 	}
 
 	return (
-		<div className={`sc-checkbox-container`}>
-			{label && <div className="sc-checkbox-label">{label}</div>}
+		<div className={`sc-checkbox-container`} style={config.checkboxConatiner}>
+			{label && (
+				<div className="sc-checkbox-label" style={config.checkboxLable}>
+					{label}
+				</div>
+			)}
 			<input
 				type="checkbox"
 				className="cs-checkbox"
 				checked={current}
 				value={current}
 				onChange={onChange}
+				style={config.checkbox}
 			/>
 		</div>
 	);

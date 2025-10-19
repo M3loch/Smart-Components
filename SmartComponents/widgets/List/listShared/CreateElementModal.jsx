@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Button, Input, ListModalField } from "../../..";
 import close from "../../../assets/close.svg";
+import config from "../../../config";
 
 function _CreateElementModal({
 	type,
 	setList,
+	list,
 	setCreateElementModal,
 	modalBackground,
 }) {
@@ -36,12 +38,16 @@ function _CreateElementModal({
 				<ListModalField type={type} valueState={[newValue, setNewValue]} />
 			</div>
 			<Button
-				innerText={"save"}
+				innerText={
+					config.saveButtonImg ? (
+						<img src={config.saveButtonImg} />
+					) : (
+						config.saveButtonText
+					)
+				}
 				onClick={() => {
-					setList((prev) => {
-						prev.push(newValue);
-						return prev;
-					});
+					list.push(newValue);
+					setList(list);
 					setCreateElementModal(false);
 				}}
 			/>

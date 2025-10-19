@@ -1,4 +1,5 @@
 import { CheckBox } from "../../..";
+import config from "../../../config";
 
 function _TableHeader({ tableName, isCollapsable, collapsed, setCollapsed }) {
 	const _styles = {
@@ -10,14 +11,22 @@ function _TableHeader({ tableName, isCollapsable, collapsed, setCollapsed }) {
 	};
 	return (
 		<div
-			className={
-				!collapsed ? "smart-table-header-opend" : "smart-table-header-collapsed"
+			className={"sc-table-header"}
+			style={
+				collapsed
+					? { ...config.tableHeaderCollapsed, ..._styles }
+					: { ...config.tableHeaderOpened, ..._styles }
 			}
-			style={_styles}
 		>
-			<p className="smart-table-name">{tableName}</p>
+			<p className="sc-table-name" style={config.tableName}>
+				{tableName}
+			</p>
 			{isCollapsable && (
-				<CheckBox checked={!collapsed} setChecked={setCollapsed} />
+				<CheckBox
+					value={collapsed}
+					setValue={setCollapsed}
+					options={[false, true]}
+				/>
 			)}
 		</div>
 	);

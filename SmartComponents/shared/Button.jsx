@@ -1,8 +1,11 @@
 import { useState } from "react";
 import config from "../config";
 
-function _Button({ label = null, onClick, value, innerText }) {
-	const [_style, setStyle] = useState(config.buttonConfig);
+function _Button({ label = null, onClick, value, innerText, style = {} }) {
+	const uniqueStyle = { ...config.buttonConfig, ...style };
+	const uniqueHoverStyle = { ...config.buttonHoverConfig, ...style };
+	const uniqueActiveStyle = { ...config.buttonActiveConfig, ...style };
+	const [_style, setStyle] = useState(uniqueStyle);
 	function clickEvent() {
 		onClick(value);
 	}
@@ -12,10 +15,10 @@ function _Button({ label = null, onClick, value, innerText }) {
 			{label && <div className="sc-button-label">{label}</div>}
 			<button
 				style={_style}
-				onMouseEnter={() => setStyle(config.buttonHoverConfig)}
-				onMouseLeave={() => setStyle(config.buttonConfig)}
-				onMouseDown={() => setStyle(config.buttonActiveConfig)}
-				onMouseUp={() => setStyle(config.buttonHoverConfig)}
+				onMouseEnter={() => setStyle(uniqueHoverStyle)}
+				onMouseLeave={() => setStyle(uniqueStyle)}
+				onMouseDown={() => setStyle(uniqueActiveStyle)}
+				onMouseUp={() => setStyle(uniqueHoverStyle)}
 				className="sc-button"
 				onClick={clickEvent}
 			>

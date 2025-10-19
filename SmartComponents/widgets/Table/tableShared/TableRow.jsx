@@ -1,4 +1,5 @@
 import { TableControls, TableValue } from "../../..";
+import config from "../../../config";
 import { randomKey } from "../../../lib/utils";
 
 function _TableRow({
@@ -36,15 +37,13 @@ function _TableRow({
 		flexDirection: "row",
 		justifyContent: "space-evenly",
 		textAlign: "center",
+		cursor: isDraggable ? "move" : "default",
 	};
 	const _maxWidth = (1 / (values.length + 2)) * 100;
 	return isDraggable ? (
 		<div
-			className={"smart-table-row"}
-			style={(() => {
-				_styles.cursor = "move";
-				return _styles;
-			})()}
+			className={"sc-table-row"}
+			style={_styles}
 			onDragStart={() => handleDragStart(index)}
 			onDragOver={handleDragOver}
 			onDrop={() => handleDrop(index)}
@@ -52,9 +51,9 @@ function _TableRow({
 		>
 			<TableValue
 				value={index + 1}
-				className={"smart-table-row-counter"}
 				_maxWidth={_maxWidth}
 				_width={`${_maxWidth}%`}
+				style={config.tableRowNumber}
 			/>
 			{values.map((value) => (
 				<TableValue
@@ -70,12 +69,13 @@ function _TableRow({
 					setObjects={setObjects}
 					setIsEditModalOpen={setIsEditModalOpen}
 					setEditTarget={setEditTarget}
+					objects={objects}
 				/>
 			)}
 		</div>
 	) : (
-		<div className={"smart-table-row"} style={_styles}>
-			<TableValue value={index} _maxWidth={_maxWidth} />
+		<div className={"sc-table-row"} style={_styles}>
+			<TableValue value={index + 1} _maxWidth={_maxWidth} />
 			{values.map((value) => (
 				<TableValue
 					key={randomKey()}
@@ -87,8 +87,7 @@ function _TableRow({
 				<TableControls
 					_maxWidth={_maxWidth}
 					index={index}
-					editSrc={editSrc}
-					deleteSrc={deleteSrc}
+					objects={objects}
 					deleteObject={deleteObject}
 					setObjects={setObjects}
 					setIsEditModalOpen={setIsEditModalOpen}

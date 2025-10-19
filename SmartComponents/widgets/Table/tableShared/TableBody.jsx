@@ -37,11 +37,11 @@ function _TableBody({
 			{editable && (
 				<div
 					className="smart-table-create-button-container"
-					style={{ padding: "5px" }}
+					style={config.tableCreateButtonContainer}
 				>
 					<Button
 						innerText={config.createButtonText || config.careateButtonImg}
-						style={{ width: "100%", padding: "5px" }}
+						style={{ padding: "5px", margin: " 5px 0" }}
 						onClick={setIsCreateModalOpen}
 						value={true}
 						className="smart-table-new-button"

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import config from "../config";
 
 function _Textarea({
 	placeholder,
@@ -12,9 +13,9 @@ function _Textarea({
 
 	function changeEvent(event) {
 		const val = event.target.value;
-		sideEffect && sideEffect();
 		if (max !== null && val.length > max) return;
 		setValue(val);
+		sideEffect && sideEffect(val);
 	}
 
 	useEffect(() => {
@@ -25,10 +26,15 @@ function _Textarea({
 	}, [value]);
 
 	return (
-		<div className="smart-textarea-container">
-			{label && <div className="smart-textarea-label">{label}</div>}
+		<div className="smart-textarea-container" style={config.textareaContainer}>
+			{label && (
+				<div className="smart-textarea-label" style={config.textareaLabel}>
+					{label}
+				</div>
+			)}
 			<textarea
 				className={"smart-text-area"}
+				style={config.textarea}
 				ref={textareaRef}
 				placeholder={placeholder}
 				value={value}

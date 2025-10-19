@@ -1,3 +1,4 @@
+import config from "../../../config";
 import { randomKey } from "../../../lib/utils";
 
 function _TableLabel({ columnNames = [], editable }) {
@@ -7,33 +8,28 @@ function _TableLabel({ columnNames = [], editable }) {
 		justifyContent: "space-evenly",
 		alignItems: "center",
 	};
-
 	const _maxWidth = (1 / (columnNames.length + 2)) * 100;
+
+	const _columnStyle = {
+		textAlign: "center",
+		textWrap: "wrap",
+		flex: 1,
+		maxWidth: `${_maxWidth}%`,
+		width: `100%`,
+	};
+
 	return (
-		<div className={"smart-table-label"} style={_styles}>
-			<div
-				className={"smart-table-first-column"}
-				style={{
-					textAlign: "center",
-					wordBreak: "break-all",
-					textWrap: "wrap",
-					flex: 1,
-					maxWidth: `${_maxWidth}%`,
-					width: `100%`,
-				}}
-			/>
+		<div
+			className={"sc-table-label"}
+			style={{ ..._styles, ...config.tableLabel }}
+		>
+			<div className={"sc-table-first-column"} style={_columnStyle} />
 			{columnNames.map((column) => {
 				return (
 					<div
 						key={randomKey()}
-						className={"smart-table-column"}
-						style={{
-							textAlign: "center",
-							wordBreak: "break-all",
-							textWrap: "wrap",
-							flex: 1,
-							maxWidth: `${_maxWidth}%`,
-						}}
+						className={"sc-table-column"}
+						style={_columnStyle}
 					>
 						{column}
 					</div>
@@ -41,7 +37,7 @@ function _TableLabel({ columnNames = [], editable }) {
 			})}
 			{editable && (
 				<div
-					className={"smart-table-controls-column"}
+					className={"sc-table-controlls-column"}
 					style={{
 						minWidth: `${_maxWidth}%`,
 					}}

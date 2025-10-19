@@ -2,15 +2,14 @@ import { useState } from "react";
 import { Button, TableModalField } from "../../..";
 import close from "../../../assets/close.svg";
 import { randomKey } from "../../../lib/utils";
+import config from "../../../config";
 
 function _CreateModal({
 	setIsCreateModalOpen,
-	modalBackground,
-	closeSrc,
 	columnNames,
 	model,
+	objects,
 	setObjects,
-	saveButtonText,
 }) {
 	const [stopper, setStopper] = useState(false);
 	const [newObject, setNewObject] = useState({});
@@ -20,13 +19,14 @@ function _CreateModal({
 	}
 	return (
 		<div
-			className={"smart-table-edit-modal"}
+			className={"smart-table-create-modal-bg"}
 			style={{
 				position: "fixed",
 				display: "flex",
+				flexDirection: "column",
 				justifyContent: "center",
 				alignItems: "center",
-				background: modalBackground,
+				background: config.modalBackground,
 				width: "100%",
 				height: "100%",
 				top: 0,
@@ -34,46 +34,64 @@ function _CreateModal({
 				zIndex: 999,
 			}}
 		>
-			<div className="smart-table-edit-modal-header">
-				<Button
-					onClick={setIsCreateModalOpen}
-					value={false}
-					innerText={<img src={closeSrc ? closeSrc : close} />}
-				/>
-			</div>
-			<div className="smart-table-create-modal">
-				{Object.keys(model).map((key, index) => {
-					return (
-						<TableModalField
-							key={randomKey()}
-							param={columnNames[index]}
-							type={Array.isArray(model[key]) ? "array" : model[key]}
-							options={Array.isArray(model[key]) ? model[key] : null}
-							valueState={["", (newValue) => objectSetter(key, newValue)]}
-						/>
-					);
-				})}
-				<p style={stopper ? { color: "red" } : { color: "transparent" }}>
-					Не все поля заполненны
-				</p>
-				<Button
-					onClick={() => {
-						let temp = false;
-						Object.keys(model).map((key) => {
-							if (!Boolean(newObject[key])) {
-								temp = true;
-							}
-						});
-						setStopper(temp);
-						if (temp) return;
-						setObjects((prev) => {
-							prev.push(newObject);
-							return prev;
-						});
-						setIsCreateModalOpen(false);
-					}}
-					innerText={saveButtonText}
-				/>
+			<div
+				className="smart-table-create-modal"
+				style={{ ...config.tableModal }}
+			>
+				<div
+					className="sc-table-create-modal-header"
+					style={config.tableModalHeader}
+				>
+					<Button
+						onClick={setIsCreateModalOpen}
+						value={false}
+						innerText={
+							config.closeButtonImg ? (
+								<img src={config.closeButtonImg} />
+							) : (
+								config.closeButtonText
+							)
+						}
+					/>
+				</div>
+				<div className="sc-table-modal-body" style={config.tableModalBody}>
+					{Object.keys(model).map((key, index) => {
+						return (
+							<TableModalField
+								key={randomKey()}
+								param={columnNames[index]}
+								type={Array.isArray(model[key]) ? "array" : model[key]}
+								options={Array.isArray(model[key]) ? model[key] : null}
+								valueState={["", (newValue) => objectSetter(key, newValue)]}
+							/>
+						);
+					})}
+					<p style={stopper ? { color: "red" } : { color: "transparent" }}>
+						Не все поля заполненны
+					</p>
+					<Button
+						onClick={() => {
+							let temp = false;
+							Object.keys(model).map((key) => {
+								if (!Boolean(newObject[key])) {
+									temp = true;
+								}
+							});
+							setStopper(temp);
+							if (temp) return;
+							objects.push(newObject);
+							setObjects(objects);
+							setIsCreateModalOpen(false);
+						}}
+						innerText={
+							config.saveButtonImg ? (
+								<img src={config.saveButtonImg} />
+							) : (
+								config.saveButtonText
+							)
+						}
+					/>
+				</div>
 			</div>
 		</div>
 	);

@@ -15,7 +15,6 @@ import _TableModalField from "./widgets/Table/tableShared/TableModalField.jsx";
 import _CreateModal from "./widgets/Table/tableShared/CreateModal.jsx";
 import _Field from "./widgets/Field/Field.jsx";
 
-import "./styles/index.css";
 import _TableHeader from "./widgets/Table/tableShared/TableHeader.jsx";
 import _List from "./widgets/List/List.jsx";
 import _ListControls from "./widgets/List/listShared/ListControls.jsx";

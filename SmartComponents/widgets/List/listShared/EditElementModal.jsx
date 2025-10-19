@@ -4,6 +4,7 @@ import close from "../../../assets/close.svg";
 
 function _EditElementModal({
 	type,
+	list,
 	setList,
 	setEditListModal,
 	modalBackground,
@@ -42,13 +43,13 @@ function _EditElementModal({
 			<Button
 				innerText={"save"}
 				onClick={() => {
-					setList((prev) => {
-						const list = [];
-						prev.forEach((element) => {
-							element != target ? list.push(element) : list.push(currentValue);
-						});
-						return list;
+					const newList = [];
+					list.forEach((element) => {
+						element != target
+							? newList.push(element)
+							: newList.push(currentValue);
 					});
+					setList(newList);
 					setEditListModal(false);
 				}}
 			/>

@@ -6,16 +6,11 @@ import config from "../../../config";
 function _TableControls({
 	_maxWidth,
 	index,
+	objects,
 	setObjects,
 	setIsEditModalOpen,
 	setEditTarget,
 }) {
-	const deleteSrc = (() => {
-		config.deleteButtonText || config.deleteButtonImg;
-	})();
-	const editSrc = (() => {
-		config.editButtonText || config.editButtonImg;
-	})();
 	return (
 		<div
 			className={"smart-table-controls"}
@@ -27,35 +22,34 @@ function _TableControls({
 				textWrap: "wrap",
 				flex: 1,
 				boxSizing: "content-box",
-				maxWidth: `calc(${_maxWidth}%)`,
+				maxWidth: `${_maxWidth}%`,
+				...config.tableRowControls,
 			}}
 		>
 			<Button
 				innerText={
-					editSrc != null ? (
-						<img src={editSrc} />
+					config.editButtonImg ? (
+						<img src={config.editButtonImg} />
 					) : (
-						<img src={_edit} style={{ width: "20px" }} />
+						config.editButtonText
 					)
 				}
 				onClick={() => {
 					setEditTarget(index);
 					setIsEditModalOpen(true);
 				}}
-				style={{ padding: "10px" }}
 			/>
 			<Button
 				innerText={
-					deleteSrc != null ? (
-						<img src={deleteSrc} />
+					config.deleteButtonImg ? (
+						<img src={config.deleteButtonImg} />
 					) : (
-						<img src={_delete} style={{ width: "20px" }} />
+						config.deleteButtonText
 					)
 				}
 				onClick={() =>
-					setObjects((prev) => prev.filter((object) => object !== prev[index]))
+					setObjects(objects.filter((object) => object !== objects[index]))
 				}
-				style={{ padding: "10px" }}
 			/>
 		</div>
 	);

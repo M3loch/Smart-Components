@@ -1,13 +1,15 @@
+import config from "../config";
+
 function _Input({
 	value,
 	setValue,
-	style = {},
+	label = null,
 	type = "text",
 	min = null,
 	max = null,
 	placeholder,
 	sideEffect,
-	label = null,
+	style,
 }) {
 	if (type == "string") {
 		type = "text";
@@ -55,12 +57,19 @@ function _Input({
 	}
 
 	return (
-		<div className="smart-input-container smart-container">
-			{label && <div className="smart-input-label">{label}</div>}
+		<div
+			className="smart-input-container smart-container"
+			style={config.inputContainer}
+		>
+			{label && (
+				<div style={config.inputLabel} className="smart-input-label">
+					{label}
+				</div>
+			)}
 
 			<input
 				placeholder={placeholder}
-				style={style}
+				style={style || config.input}
 				value={value}
 				onChange={onChange}
 			/>

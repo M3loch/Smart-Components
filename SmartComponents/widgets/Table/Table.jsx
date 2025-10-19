@@ -3,10 +3,12 @@ import _TableHeader from "./tableShared/TableHeader";
 import { CreateModal, EditModal, TableBody, TableHeader } from "../..";
 import config from "../../config";
 
-import "../../styles/table.css";
 function _Table({
 	tableName,
 	columnNames = [],
+	CustomCreateModal = null,
+	CustomEditModal = null,
+
 	objects = [],
 	setObjects,
 	values = [],
@@ -16,10 +18,6 @@ function _Table({
 	isDraggable = false,
 	editable = false,
 	width = "auto",
-	height = "auto",
-	saveButtonText = "save",
-	createButtonText = config.createButtonText,
-	modalBackground = config.modalBackground,
 }) {
 	const [_isCollapsed, _setIsCollapsed] = useState(isCollapsed);
 	const [dragIndex, setDragIndex] = useState(null);
@@ -29,29 +27,42 @@ function _Table({
 
 	return (
 		<>
-			{isEditModalOpen && (
-				<EditModal
-					setIsModalOpen={setIsEditModalOpen}
-					editTarget={editTarget}
-					objects={objects}
-					setObjects={setObjects}
-					modalBackground={modalBackground}
-					columnNames={columnNames}
-					model={model}
-					saveButtonText={saveButtonText}
-				/>
-			)}
-			{isCreateModalOpen && (
-				<CreateModal
-					setIsCreateModalOpen={setIsCreateModalOpen}
-					modalBackground={modalBackground}
-					model={model}
-					setObjects={setObjects}
-					saveButtonText={saveButtonText}
-					columnNames={columnNames}
-				/>
-			)}
-			<div className="smart-table" style={{ width: width, height: height }}>
+			{isEditModalOpen &&
+				(CustomEditModal ? (
+					<CustomEditModal
+						setObjects={setObjects}
+						setModal={setIsEditModalOpen}
+						objects={objects}
+						target={editTarget}
+					/>
+				) : (
+					<EditModal
+						setIsModalOpen={setIsEditModalOpen}
+						editTarget={editTarget}
+						objects={objects}
+						setObjects={setObjects}
+						columnNames={columnNames}
+						model={model}
+					/>
+				))}
+			{isCreateModalOpen &&
+				(CustomCreateModal ? (
+					<CustomCreateModal
+						setObjects={setObjects}
+						setModal={setIsCreateModalOpen}
+						objects={objects}
+					/>
+				) : (
+					<CreateModal
+						setIsCreateModalOpen={setIsCreateModalOpen}
+						modalBackground={config.modalBackground}
+						model={model}
+						objects={objects}
+						setObjects={setObjects}
+						columnNames={columnNames}
+					/>
+				))}
+			<div className="smart-table" style={{ width: width, ...config.table }}>
 				<TableHeader
 					tableName={tableName}
 					isCollapsable={isCollapsable}
