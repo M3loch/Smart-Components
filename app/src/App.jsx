@@ -29,8 +29,6 @@ function App() {
 	});
 	const [fieldValue, setFieldValue] = useState("value");
 	const [textAreaValue, setTextAreaValue] = useState("");
-	const checked1 = useState(false);
-	const checked2 = useState(false);
 	const [value, setValue] = useState("");
 	const [objects, setObjects] = useState([
 		{ name: "qwe", surname: "ewq", phone: 123, sex: "м" },
@@ -84,7 +82,7 @@ function App() {
 			{value}
 			<Button innerText={"Button"} value={"value setted"} onClick={setValue} />
 			<CopyText value={"text to copy"} />
-			{/* <Table
+			<Table
 				tableName={"table"}
 				isCollapsable={true}
 				columnNames={["имя", "фамилия", "номер", "пол"]}
@@ -100,22 +98,22 @@ function App() {
 					sex: ["м", "ж"],
 				}}
 				width="700px"
-			/> */}
+			/>
 			<Field
 				value={fieldValue}
 				setValue={setFieldValue}
-				placeholder={"field placeholder"}
+				label={"field label"}
 				editable={true}
 				width="200px"
 			/>
 
-			{/* <List
-				list={listState[0]}
-				setList={listState[1]}
+			<List
+				list={list}
+				setList={setList}
 				isCollapsable={true}
 				listName={"list"}
-				width="200px"
-			/> */}
+				width="300px"
+			/>
 		</>
 	);
 }
